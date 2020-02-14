@@ -31,10 +31,10 @@
 
 <p></p>
 <br>
-<h3>Uploaded Files as Seen in Azure Storage</h3>
+<h3>Uploaded Files as Seen in Azure Storage A</h3>
 <table class="table">
     <tbody>
-        @foreach (var item in Model.myFiles)
+        @foreach (var item in Model.myFilesA)
         {
             <tr>
                 <td>
@@ -42,6 +42,55 @@
                 </td>
                 <td>
                     <a asp-page-handler="DownloadFile" asp-route-id="@item.FileName">Download</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<p></p>
+<br>
+<h3>Uploaded Files as Seen in Azure Storage B</h3>
+<table class="table">
+    <tbody>
+        @foreach (var item in Model.myFilesB)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>
+                    <a asp-page-handler="DownloadFile" asp-route-id="@item.FileName">Download</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Database Info</h3>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>
+                Primary Key
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.entries[0].FileName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.entries)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
                 </td>
             </tr>
         }
