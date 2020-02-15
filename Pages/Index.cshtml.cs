@@ -10,6 +10,7 @@ using FileUpload.Models;
 using Azure.Storage.Blobs.Models;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
 
 namespace FileUpload.Pages
 {
@@ -29,12 +30,12 @@ namespace FileUpload.Pages
         public IList<MyFile> myFilesA { get; set; }
         public IList<DBEntry> entries { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, BlobServiceClient blobServiceClient, MyFileContext context)
+        public IndexModel(ILogger<IndexModel> logger, IAzureClientFactory<BlobServiceClient> factory, MyFileContext context)
         {
             _logger = logger;
 
-            var blobService = blobServiceClient;
-            _blobContainerA = blobService.GetBlobContainerClient(BlobContainerNameA);
+            var blobServiceA = factory.CreateClient("storageA");
+            _blobContainerA = blobServiceA.GetBlobContainerClient(BlobContainerNameA);
             _blobContainerA.CreateIfNotExists();
 
             myFilesA = new List<MyFile>();
