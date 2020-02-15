@@ -25,7 +25,7 @@ namespace FileUpload
 
             services.AddAzureClients(builder =>
             {
-                builder.AddBlobServiceClient(Configuration["halzelstoragesecret"]).WithName("storageA"); // TODO 
+                builder.AddBlobServiceClient(Configuration["halzelstoragesecret"]); //.WithName("storageA"); // TODO 
             });
 
             services.AddAzureClients(builder =>
