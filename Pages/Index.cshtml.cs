@@ -16,9 +16,8 @@ namespace FileUpload.Pages
     public class IndexModel : PageModel
     {
         private static readonly string BlobContainerNameA = "halzeltemp0";
-        private static readonly string BlobContainerNameB = "halzeltemp1";
         private readonly ILogger<IndexModel> _logger;
-        private readonly BlobContainerClient _blobContainerA, _blobContainerB;
+        private readonly BlobContainerClient _blobContainerA;
 
         private readonly MyFileContext _context;
 
@@ -28,7 +27,6 @@ namespace FileUpload.Pages
         public DBEntry dBEntry { get; set; }
 
         public IList<MyFile> myFilesA { get; set; }
-        public IList<MyFile> myFilesB { get; set; }
         public IList<DBEntry> entries { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, BlobServiceClient blobServiceClient, MyFileContext context)
@@ -39,11 +37,7 @@ namespace FileUpload.Pages
             _blobContainerA = blobService.GetBlobContainerClient(BlobContainerNameA);
             _blobContainerA.CreateIfNotExists();
 
-            _blobContainerB = blobService.GetBlobContainerClient(BlobContainerNameB);
-            _blobContainerB.CreateIfNotExists();
-
             myFilesA = new List<MyFile>();
-            myFilesB = new List<MyFile>();
             entries = new List<DBEntry>();
 
             _context = context;
@@ -59,16 +53,6 @@ namespace FileUpload.Pages
             }
 
             myFilesA = files;
-
-            // storage B
-            files = new List<MyFile>();
-
-            foreach (BlobItem blob in _blobContainerB.GetBlobs())
-            {
-                files.Add(new MyFile() { FileName = blob.Name });
-            }
-
-            myFilesB = files;
 
             entries = await _context.DbEntry.ToListAsync();
         }
@@ -96,7 +80,6 @@ namespace FileUpload.Pages
             }
 
             await _blobContainerA.UploadBlobAsync(fileUpload.FileName, fileUpload.File.OpenReadStream());
-            await _blobContainerB.UploadBlobAsync(fileUpload.FileName, fileUpload.File.OpenReadStream());
 
             // TODO: add entry to the DB
             dBEntry.FileName = fileUpload.FileName;
