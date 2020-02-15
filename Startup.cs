@@ -27,11 +27,17 @@ namespace FileUpload
             {
                 builder.AddBlobServiceClient(Configuration["halzelstoragesecret"]).WithName("storageA"); // TODO 
             });
-/*
+
             services.AddAzureClients(builder =>
             {
-                builder.AddBlobServiceClient(Configuration["halzelstoragesecretB"]); // TODO 
-            });*/
+                builder.AddBlobServiceClient(Configuration["halzelstoragesecretB"]).WithName("storageB"); // TODO 
+            });
+
+            /*
+                        services.AddAzureClients(builder =>
+                        {
+                            builder.AddBlobServiceClient(Configuration["halzelstoragesecretB"]); // TODO 
+                        });*/
 
             services.AddDbContext<MyFileContext>(options =>
       options.UseSqlServer(Configuration["halzeldbsecret"]));
