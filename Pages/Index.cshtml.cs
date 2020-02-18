@@ -35,7 +35,7 @@ namespace FileUpload.Pages
         {
             _logger = logger;
 
-            var blobServiceA = blobServiceClientFactory.CreateClient("Default");
+            var blobServiceA = blobServiceClientFactory.CreateClient("Default"); // storageA
             var blobServiceB = blobServiceClientFactory.CreateClient("storageB");
 
             _blobContainerA = blobServiceA.GetBlobContainerClient(BlobContainerNameA);
