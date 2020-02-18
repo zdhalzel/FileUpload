@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Azure;
 using FileUpload.Models;
 using Microsoft.EntityFrameworkCore;
+using FileUpload.Hubs;
 
 namespace FileUpload
 {
@@ -33,14 +34,15 @@ namespace FileUpload
                 builder.AddBlobServiceClient(Configuration["halzelstoragesecretB"]).WithName("storageB"); // TODO 
             });
 
-            /*
-                        services.AddAzureClients(builder =>
-                        {
-                            builder.AddBlobServiceClient(Configuration["halzelstoragesecretB"]); // TODO 
-                        });*/
+            //services.AddAzureClients(builder =>
+            //{
+            //    builder.AddBlobServiceClient(Configuration["halzelstoragesecretB"]); // TODO 
+            //});
 
             services.AddDbContext<MyFileContext>(options =>
-      options.UseSqlServer(Configuration["halzeldbsecret"]));
+            options.UseSqlServer(Configuration["halzeldbsecret"]));
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +69,7 @@ namespace FileUpload
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }
