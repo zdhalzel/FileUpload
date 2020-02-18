@@ -4,10 +4,38 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h3>SignalR Chat</h3>
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-2">User</div>
+        <div class="col-4"><input type="text" id="userInput" /></div>
+    </div>
+    <div class="row">
+        <div class="col-2">Message</div>
+        <div class="col-4"><input type="text" id="messageInput" /></div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6">
+            <input type="button" id="sendButton" value="Send Message" />
+        </div>
+    </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <ul id="messagesList"></ul>
+    </div>
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+<hr />
 
 <h3>Upload a File :)</h3>
 <hr />
@@ -36,14 +64,14 @@
     <tbody>
         @foreach (var item in Model.myFilesA)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FileName)
-            </td>
-            <td>
-                <a asp-page-handler="DownloadFile" asp-route-id="@item.FileName">Download</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>
+                    <a asp-page-handler="DownloadFile" asp-route-id="@item.FileName">Download</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -54,11 +82,11 @@
     <tbody>
         @foreach (var item in Model.myFilesB)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FileName)
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -80,14 +108,14 @@
     <tbody>
         @foreach (var item in Model.entries)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FileName)
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+            </tr>
         }
     </tbody>
 </table>
