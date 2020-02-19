@@ -11,16 +11,19 @@ using Azure.Storage.Blobs.Models;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
+using FileUpload.Mongo;
 
 namespace FileUpload.Pages
 {
     public class IndexModel : PageModel
     {
-        private static readonly string BlobContainerNameA = "halzeltemp0", BlobContainerNameB = "halzeltemp1";
+        private const string BlobContainerNameA = "halzeltemp0", BlobContainerNameB = "halzeltemp1";
         private readonly ILogger<IndexModel> _logger;
         private readonly BlobContainerClient _blobContainerA, _blobContainerB;
 
         private readonly MyFileContext _context;
+
+        private readonly MongoHelper _mongoHelper;
 
         [BindProperty]
         public MyFile fileUpload { get; set; }
@@ -30,8 +33,9 @@ namespace FileUpload.Pages
         public IList<MyFile> myFilesA { get; set; }
         public IList<MyFile> myFilesB { get; set; }
         public IList<DBEntry> entries { get; set; }
+        public IList<MyChat> chatHistory { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, IAzureClientFactory<BlobServiceClient> blobServiceClientFactory, MyFileContext context)
+        public IndexModel(ILogger<IndexModel> logger, IAzureClientFactory<BlobServiceClient> blobServiceClientFactory, MyFileContext context, MongoHelper mongoHelper)
         {
             _logger = logger;
 
@@ -48,8 +52,10 @@ namespace FileUpload.Pages
             myFilesB = new List<MyFile>();
 
             entries = new List<DBEntry>();
+            chatHistory = new List<MyChat>();
 
             _context = context;
+            _mongoHelper = mongoHelper;
         }
 
         public async Task OnGetAsync()
@@ -70,6 +76,8 @@ namespace FileUpload.Pages
             myFilesB = files;
 
             entries = await _context.DbEntry.ToListAsync();
+
+            chatHistory = _mongoHelper.GetAllChats();
         }
 
         public async Task<ActionResult> OnGetDownloadFileAsync(string id)

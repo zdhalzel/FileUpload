@@ -4,7 +4,7 @@
     ViewData["Title"] = "Home page";
 }
 
-    <h3>SignalR Chat</h3>
+<h3>SignalR Chat</h3>
 
 <div class="container">
     <div class="row">&nbsp;</div>
@@ -23,6 +23,8 @@
         </div>
     </div>
 </div>
+<hr />
+<h4>Current Chat:</h4>
 <div class="row">
     <div class="col-12">
         <hr />
@@ -37,6 +39,28 @@
 <script src="~/js/chat.js"></script>
 <hr />
 
+<h4>Chat History</h4>
+<table class="table">
+    <tbody>
+        @foreach (var item in Model.chatHistory)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+<hr />
 <h3>Upload a File :)</h3>
 <hr />
 <div class="row">

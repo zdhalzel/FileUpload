@@ -7,6 +7,7 @@ using Microsoft.Extensions.Azure;
 using FileUpload.Models;
 using Microsoft.EntityFrameworkCore;
 using FileUpload.Hubs;
+using FileUpload.Mongo;
 
 namespace FileUpload
 {
@@ -43,6 +44,7 @@ namespace FileUpload
             options.UseSqlServer(Configuration["halzeldbsecret"]));
 
             services.AddSignalR().AddAzureSignalR(Configuration["halzelsignalr"]);
+            services.AddSingleton<MongoHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
