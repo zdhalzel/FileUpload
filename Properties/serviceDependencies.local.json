@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "resourceId": "/subscriptions/07268dd7-4c50-434b-b1ff-67b8164edb41/resourceGroups/Halzel/providers/Microsoft.KeyVault/vaults/halzelkv",
+      "type": "secrets.keyVault",
+      "connectionId": "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT"
+    },
+    "storage1": {
+      "resourceId": "/subscriptions/07268dd7-4c50-434b-b1ff-67b8164edb41/resourceGroups/Halzel/providers/Microsoft.Storage/storageAccounts/halzeltemp0",
+      "type": "storage.azure",
+      "connectionId": "azurestorage0"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/07268dd7-4c50-434b-b1ff-67b8164edb41/resourceGroups/Halzel/providers/Microsoft.Sql/servers/halzeldbserver/databases/halzeldb",
+      "type": "mssql.azure",
+      "connectionId": "halzeldb"
+    },
+    "signalr1": {
+      "resourceId": "/subscriptions/07268dd7-4c50-434b-b1ff-67b8164edb41/resourceGroups/Halzel/providers/Microsoft.SignalRService/SignalR/halzelSignalR",
+      "type": "signalr.azure",
+      "connectionId": "Azure__SignalR__ConnectionString"
+    }
+  }
+}
