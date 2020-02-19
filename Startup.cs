@@ -42,7 +42,7 @@ namespace FileUpload
             services.AddDbContext<MyFileContext>(options =>
             options.UseSqlServer(Configuration["halzeldbsecret"]));
 
-            services.AddSignalR();
+            services.AddSignalR().AddAzureSignalR(Configuration["halzelsignalr"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +60,7 @@ namespace FileUpload
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseFileServer();
 
             app.UseRouting();
 

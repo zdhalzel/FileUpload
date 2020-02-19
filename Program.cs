@@ -23,6 +23,7 @@ namespace FileUpload
         // https://docs.microsoft.com/en-us/azure/key-vault/vs-key-vault-add-connected-service
         // https://docs.microsoft.com/en-us/azure/key-vault/managed-identity
         // signalR: https://docs.microsoft.com/en-us/aspnet/core/tutorials/signalr?view=aspnetcore-3.1&tabs=visual-studio
+        //          https://docs.microsoft.com/en-us/azure/azure-signalr/signalr-quickstart-dotnet-core
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
                Host.CreateDefaultBuilder(args)
